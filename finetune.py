@@ -17,16 +17,7 @@ model_name = "meta-llama/Llama-3.2-1B-Instruct"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 tokenizer.pad_token = tokenizer.eos_token  # LLaMA n'a pas de token de padding
 
-# ✅ Fonction de prétraitement
-def format_conversation(example):
-    return {
-        "text": "\n".join(f"{'Utilisateur' if msg['role'] == 'user' else 'Quera'}: {msg['content']}" 
-                           for msg in example["messages"]).strip()
-    }
-
-
-# ✅ Appliquer la transformation
-dataset = dataset.map(format_conversation)
+ 
 
 # ✅ Fonction de prétraitement avec labels
 def preprocess_function(examples):
